@@ -35,7 +35,6 @@ export class ViewMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
                 next: (response: Response | any) => {
                     const profileResponse: Profile = response.result;
                     this.profile = profileResponse;
-                    console.log(this.profile);
                 },
                 error: (err) => console.log(err)
             });
