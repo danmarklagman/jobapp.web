@@ -16,6 +16,10 @@ export const routes: Routes = [
 		loadChildren: () => import('./views/templates/hub/hub.module').then((m) => m.HubModule),
 		canActivate: [AuthenticatedGuard]
 	},
+	{
+		path: 'cv',
+		loadChildren: () => import('./views/templates/cv/cv.module').then((m) => m.CvModule),
+	},
 ];
 
 @NgModule({

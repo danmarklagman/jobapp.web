@@ -22,6 +22,11 @@ export class ProfileService {
         return this.http.get(`${PROFILE_API}/me`);
     }
 
+	public getUserProfile(userId: string | null) {
+
+        return this.http.get(`${PROFILE_API}/get/${userId}`);
+    }
+
 	public updatePersonal(profile: PersonalProfileRequest) {
 
 		return this.http.post(`${PROFILE_API}/personal/update`, profile);

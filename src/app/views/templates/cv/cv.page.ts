@@ -1,35 +1,48 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { finalize, SubscriptionLike } from 'rxjs';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SubscriptionLike } from 'rxjs';
 import { Profile } from 'src/app/models/entities/profile.model';
 import { ProfileService } from 'src/app/services/profile/profile.service';
+import { environment } from 'src/environments/environment';
+;
 
 @Component({
-	selector: 'app-view-my-profile',
-	templateUrl: './view.page.html',
-	styleUrls: ['./view.page.scss'],
+	selector: 'app-cv',
+	templateUrl: './cv.page.html',
 })
 
-export class ViewMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
+export class CvPage {
 
-    public profile: Profile = new Profile();
+	public profile: Profile = new Profile();
+    public downloadLink: string;
 
+    private userId: string | null;
     private subscriptions: SubscriptionLike[] = [];
 
 	constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private profileService: ProfileService,
+        private changeDetectorRef: ChangeDetectorRef,
     ) {
 
 	}
 
 	ngOnInit(): void {
-		
+	
+        this.userId = this.route.snapshot.paramMap.get('userId');
+
+        if (!this.userId) {
+            this.router.navigate(['/auth']);
+        }
 	}
 
     ngAfterViewInit(): void {
         
-        const getProfile$ = this.profileService.getMyProfile()
+        this.downloadLink = `${environment.apiBaseURL}/profile/pdf/download/${this.userId}`;
+        this.changeDetectorRef.detectChanges();
+
+        const getProfile$ = this.profileService.getUserProfile(this.userId)
             .pipe()
             .subscribe({
                 next: (response: Response | any) => {
@@ -40,7 +53,7 @@ export class ViewMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
             });
         this.subscriptions.push(getProfile$);
     }
-
+    
     ngOnDestroy(): void {
         
         if (this.subscriptions.length > 0) {
@@ -50,15 +63,5 @@ export class ViewMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
                 }
             });
         }
-    }
-
-    public didGoToEditMyProfilePage() {
-
-		this.router.navigate(['/hub/my-profile/edit']);
-	}
-
-    public onMailSend(data: any) {
-
-        console.log(data);
     }
 }

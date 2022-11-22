@@ -17,6 +17,7 @@ import { SkillService } from './services/skill/skill.service';
 import { EducationService } from './services/education/education.service';
 import { ExperienceService } from './services/experience/experience.service';
 import { ReferenceService } from './services/reference/reference.service';
+import { MailService } from './services/mail/mail.service';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { ReferenceService } from './services/reference/reference.service';
 		EducationService,
 		ExperienceService,
 		ReferenceService,
+		MailService,
 	],
 	bootstrap: [AppComponent]
 })

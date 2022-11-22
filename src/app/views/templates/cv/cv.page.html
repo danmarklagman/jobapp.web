@@ -1,0 +1,95 @@
+<div class="bg-gray-100">
+    <div>
+        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900"></h1>
+                <div class="flex items-center">
+                    <div class="relative inline-block text-left">
+                        <div>
+                            <a [href]="downloadLink"
+                                class="mr-1 inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                                Download as PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20 pb-20">
+                <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">{{ profile?.first_name }} {{ profile?.last_name }}</h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.title }}</p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.email }}</p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.phone_number }}</p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.website }}</p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.street }}<ng-container *ngIf="profile?.street">, </ng-container>{{ profile?.city }}, {{ profile?.province }}, {{ profile?.country }} {{ profile?.postal_code }}</p>
+                    </div>
+                    <div class="border-t border-gray-200">
+                        <dl>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Skills</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ul>
+                                        <li *ngFor="let skill of profile?.skills" class="mb-1">{{ skill?.name }} ({{ skill?.rating }})</li>
+                                    </ul>
+                                </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Educational Background</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ul>
+                                        <li *ngFor="let education of profile?.educations" class="mb-4">
+                                            <p class="font-medium text-md">{{ education?.school_name }}</p>
+                                            <p>{{ education?.address }}</p>
+                                            <p>{{ education?.degree }}</p>
+                                            <p>{{ education?.course }}</p>
+                                            <p>{{ education?.graduate_date }}</p>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Working Experiences</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ul>
+                                        <li *ngFor="let experience of profile?.experiences" class="mb-4">
+                                            <p class="font-medium text-md">{{ experience?.company_name }}</p>
+                                            <p>{{ experience?.address }}</p>
+                                            <p>{{ experience?.title }}</p>
+                                            <p><i>{{ experience?.work_description }}</i></p>
+                                            <p>{{ experience?.start_date }} - {{ experience?.end_date }}</p>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Salary Rate</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ profile?.salary_rate }}</dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Employment Status</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ profile?.employment_status }}</dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Availability</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ profile?.availability }}</dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-medium text-gray-500">Character References</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ul>
+                                        <li *ngFor="let reference of profile?.references" class="mb-4">
+                                            <p class="font-medium text-md">{{ reference?.name }}</p>
+                                            <p>{{ reference?.contact_number }}</p>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            
+            </div>
+        </main>
+    </div>
+</div>

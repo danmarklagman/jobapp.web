@@ -10,7 +10,7 @@
                     </svg> -->
                     Edit
                 </button>
-                <button (click)="didGoToEditMyProfilePage()" type="button"
+                <button type="button" data-bs-toggle="modal" data-bs-target="#sendMailModal"
                     class="inline-block px-6 py-2.5 bg-purple-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-lg hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -26,7 +26,10 @@
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">{{ profile?.first_name }} {{ profile?.last_name }}</h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.title }}</p>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.email }}</p>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.phone_number }}</p>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.website }}</p>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ profile?.street }}<ng-container *ngIf="profile?.street">, </ng-container>{{ profile?.city }}, {{ profile?.province }}, {{ profile?.country }} {{ profile?.postal_code }}</p>
         </div>
         <div class="border-t border-gray-200">
             <dl>
@@ -61,7 +64,7 @@
                                 <p>{{ experience?.address }}</p>
                                 <p>{{ experience?.title }}</p>
                                 <p><i>{{ experience?.work_description }}</i></p>
-                                <i>{{ experience?.start_date }} - {{ experience?.end_date }}</i>
+                                <p>{{ experience?.start_date }} - {{ experience?.end_date }}</p>
                             </li>
                         </ul>
                     </dd>
@@ -94,3 +97,5 @@
     </div>
 
 </div>
+
+<app-send-mail-modal (sent)="onMailSend($event)"></app-send-mail-modal>
