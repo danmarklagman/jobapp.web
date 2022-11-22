@@ -21,7 +21,7 @@ export class HttpInterceptorConfig implements HttpInterceptor {
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-		const token: string = this.localStorageService.getKeyFromLocalStorage(`mnusrtkn`);
+		const token: string = this.localStorageService.getKeyFromLocalStorage(`jatkn`);
 
 		if (token) {
 			request = request.clone({ headers: request.headers.set(`Authorization`, `Bearer ${token}`) });
@@ -43,7 +43,7 @@ export class HttpInterceptorConfig implements HttpInterceptor {
 			catchError((error) => {
 				if (error instanceof HttpErrorResponse && error.status === 401) {
 					this.broadcastService.broadcast(`UnauthenticatedEvent`, true);
-					this.router.navigateByUrl(`/login`);
+					this.router.navigateByUrl(`/auth/login`);
 					return of(error as any);
 				}
 				else if (error instanceof HttpErrorResponse && error.status === 500) {

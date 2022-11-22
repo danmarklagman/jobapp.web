@@ -1,0 +1,91 @@
+<form [formGroup]="personalProfileForm" (submit)="didSave($event)">
+    <div class="overflow-hidden shadow sm:rounded-md">
+        <div class="bg-white px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">First
+                        name *</label>
+                    <input formControlName="firstName" type="text" name="first-name" id="first-name"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('firstName')?.valid && personalProfileForm.get('firstName')?.touched }">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last
+                        name *</label>
+                    <input formControlName="lastName" type="text" name="last-name" id="last-name"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('lastName')?.valid && personalProfileForm.get('lastName')?.touched }">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="email-address" class="block text-sm font-medium text-gray-700">Email
+                        address *</label>
+                    <input formControlName="emailAddress" type="text" name="email-address" id="email-address"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('emailAddress')?.valid && personalProfileForm.get('emailAddress')?.touched }">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="phone-number" class="block text-sm font-medium text-gray-700">Phone
+                        number</label>
+                    <input formControlName="phoneNumber" type="text" name="phone-number" id="phone-number"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div class="col-span-6">
+                    <label for="street-address" class="block text-sm font-medium text-gray-700">Street
+                        address</label>
+                    <input formControlName="street" type="text" name="street-address" id="street-address"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div class="col-span-6 sm:col-span-6 lg:col-span-3">
+                    <label for="city" class="block text-sm font-medium text-gray-700">City *</label>
+                    <input formControlName="city" type="text" name="city" id="city"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('city')?.valid && personalProfileForm.get('city')?.touched }">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-3">
+                    <label for="province" class="block text-sm font-medium text-gray-700">State /
+                        Province *</label>
+                    <input formControlName="province" type="text" name="province" id="province"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('province')?.valid && personalProfileForm.get('province')?.touched }">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-3">
+                    <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP /
+                        Postal code *</label>
+                    <input formControlName="postalCode" type="text" name="postal-code" id="postal-code"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        [ngClass]="{ 'border-red-500': !personalProfileForm.get('postalCode')?.valid && personalProfileForm.get('postalCode')?.touched }">
+                </div>
+
+                <div class="col-span-3 sm:col-span-3">
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country *</label>
+                    <select formControlName="country" id="country" name="country"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        [style.border]="!personalProfileForm.get('country')?.valid && personalProfileForm.get('country')?.touched ? '1px solid rgb(239 68 68 / var(--tw-border-opacity)) !important' : ''">
+                        <option value="">Choose one</option>
+                        <option *ngFor="let country of countries" [value]="country?.code" [selected]="country.code === profile.country">{{ country.name }}</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <button type="submit" [disabled]="isSaving"
+                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <svg *ngIf="!isSaving" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                </svg>
+                <div *ngIf="isSaving" class="spinner-border animate-spin inline-block w-4 h-4 border-1 rounded-full mr-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <span>Update</span>
+            </button>
+        </div>
+    </div>
+</form>

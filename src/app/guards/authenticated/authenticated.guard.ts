@@ -21,7 +21,7 @@ export class AuthenticatedGuard implements CanActivate {
 		if (token) {
 			return true;
 		} else {
-			return this.router.navigateByUrl('/login');
+			return this.router.navigateByUrl('/auth/login');
 		}
 	}
 }

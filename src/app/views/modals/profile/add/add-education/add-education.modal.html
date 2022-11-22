@@ -1,0 +1,112 @@
+
+<!-- Modal -->
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="addEducationModal" tabindex="-1" aria-labelledby="addEducationModalLabel" aria-hidden="true">
+    <div class="modal-dialog relative w-auto pointer-events-none">
+        <form [formGroup]="educationForm" (submit)="didSave($event)">
+            <div
+                class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div
+                    class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                    <h5 class="text-xl font-medium leading-normal text-gray-800" id="addEducationModalLabel">Add Educational Background
+                    </h5>
+                    <button type="button"
+                        class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body relative p-4">
+
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6">
+                            <label for="school-name" class="block text-sm font-medium text-gray-700">School Name *</label>
+                            <input formControlName="schoolName" type="text" name="school-name" id="school-name"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                [ngClass]="{ 'border-red-500': !educationForm.get('schoolName')?.valid && educationForm.get('schoolName')?.touched }">
+                        </div>
+                        <div class="col-span-6">
+                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                            <input formControlName="address" type="text" name="address" id="address"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                        <div class="col-span-6">
+                            <label for="degree"
+                                class="block text-sm font-medium text-gray-700">Degree *</label>
+                            <select formControlName="degree" id="degree" name="degree"
+                                class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                [style.border]="!educationForm.get('degree')?.valid && educationForm.get('degree')?.touched ? '1px solid rgb(239 68 68 / var(--tw-border-opacity)) !important' : ''">
+                                <option value="">Choose one</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="master">Master</option>
+                                <option value="bachelor">Bachelor</option>
+                                <option value="college_undergraduate">College Undergraduate</option>
+                                <option value="high_school_graduate">High School Graduate</option>
+                                <option value="high_school_undergraduate">High School Undergraduate</option>
+                                <option value="elementray_graduate">Elementary Graduate</option>
+                                <option value="none">No Education</option>
+                            </select>
+                        </div>
+                        <div class="col-span-6">
+                            <label for="course" class="block text-sm font-medium text-gray-700">Course</label>
+                            <textarea formControlName="course" name="course" id="course"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                        </div>
+                        <div class="col-span-6">
+                            <label for="graduate-date"
+                                class="block text-sm font-medium text-gray-700">Graduate Date *</label>
+                            <input formControlName="graduateDate" type="date" name="graduate-date" id="graduate-date"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                [ngClass]="{ 'border-red-500': !educationForm.get('graduateDate')?.valid && educationForm.get('graduateDate')?.touched }">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    <button #closeEducationButton type="button" class="px-6
+                        py-2.5
+                        bg-purple-600
+                        text-white
+                        font-medium
+                        text-xs
+                        leading-tight
+                        uppercase
+                        rounded
+                        shadow-md
+                        hover:bg-purple-700 hover:shadow-lg
+                        focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0
+                        active:bg-purple-800 active:shadow-lg
+                        transition
+                        duration-150
+                        ease-in-out" data-bs-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button type="submit" class="px-6
+                        py-2.5
+                        bg-blue-600
+                        text-white
+                        font-medium
+                        text-xs
+                        leading-tight
+                        uppercase
+                        rounded
+                        shadow-md
+                        hover:bg-blue-700 hover:shadow-lg
+                        focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+                        active:bg-blue-800 active:shadow-lg
+                        transition
+                        duration-150
+                        ease-in-out
+                        ml-1"
+                    >
+                        <div *ngIf="isSaving" class="spinner-border animate-spin inline-block w-4 h-4 border-1 rounded-full mr-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <ng-container *ngIf="!isSaving">Save Education</ng-container>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
