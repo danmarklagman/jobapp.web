@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize, SubscriptionLike } from 'rxjs';
 import { DatatableComponent } from 'src/app/components/datatable/datatable.component';
 import { TableHeaderInterface } from 'src/app/interfaces/table-header.interface';
@@ -52,6 +53,7 @@ export class EditMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
     private subscriptions: SubscriptionLike[] = [];
 
 	constructor(
+        private router: Router,
         private profileService: ProfileService,
         private industryService: IndustryService,
         private skillService: SkillService,
@@ -119,6 +121,11 @@ export class EditMyProfilePage implements OnInit, AfterViewInit, OnDestroy {
     public onReferenceSave(reference: Reference) {
 
         this.references.push(reference);
+    }
+
+    public didGoBack() {
+
+        this.router.navigate(['/hub/my-profile/view']);
     }
 
     private getMyProfile() {
