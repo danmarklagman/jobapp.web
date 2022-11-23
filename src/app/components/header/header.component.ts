@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BroadcasterService } from 'src/app/services/broadcaster/broadcaster.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-header',
@@ -12,18 +12,14 @@ import { BroadcasterService } from 'src/app/services/broadcaster/broadcaster.ser
 export class HeaderComponent {
 
 	constructor(
-		private broadcasterService: BroadcasterService,
+		private router: Router,
 	) {
 
 	}
 
-	public toggleSidenav() {
+	public didNavigateToHome() {
 
-		this.broadcasterService.broadcast('ToggleSidenavEvent', true);
-	}
-
-	public didNavigateToProfile() {
-
+		this.router.navigate(['/']);
 	}
 
 	public didLogout() {
